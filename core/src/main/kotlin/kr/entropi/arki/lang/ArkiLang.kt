@@ -4,8 +4,31 @@ import org.slf4j.LoggerFactory
 import java.io.File
 import java.util.Locale
 
-class ArkiLang {
+object ArkiLang {
     private val logger = LoggerFactory.getLogger("ArkiLang")
+
+    fun resolveFallback(locale: Locale, key: String): String? {
+        val files = ArkiLangRegistry.files.sortedBy { it.priority }
+        for (file in files) {
+            val resolved = file.resolve(key) ?: continue
+            return resolved
+        }
+        return null
+    }
+
+    fun resolve(locale: Locale, key: String): String? {
+        val files = ArkiLangRegistry.filesByLocale(locale)
+        for (file in files) {
+            val resolved = file.resolve(key) ?: continue
+            return resolved
+        }
+        return resolveFallback(locale, key)
+    }
+
+    fun formatted(locale: Locale, key: String, vararg args: Any): String? {
+        val resolved = resolve(locale, key) ?: return null
+        return ArkiLangRegistry.formatter.format(resolved, *args)
+    }
 
     /**
      * @param baseClass Base class to load the file
@@ -32,7 +55,7 @@ class ArkiLang {
         }
 
         val langFile = loaderImpl.loadFromStream(locale, stream)
-        ArkiLangRegistry.files.add(langFile)
+        ArkiLangRegistry.addFilePreprocessing(langFile)
 
         return true
     }
@@ -94,7 +117,7 @@ class ArkiLang {
         val stream = file.inputStream()
 
         val langFile = loaderImpl.loadFromStream(locale, stream)
-        ArkiLangRegistry.files.add(langFile)
+        ArkiLangRegistry.addFilePreprocessing(langFile)
 
         return true
     }
