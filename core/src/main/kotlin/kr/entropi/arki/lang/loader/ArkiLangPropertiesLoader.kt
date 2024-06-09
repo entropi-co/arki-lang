@@ -19,7 +19,7 @@ object ArkiLangPropertiesLoader: ArkiLangLoader {
 
     override fun loadFromStream(locale: Locale, stream: InputStream): ArkiLangFile {
         val properties = Properties()
-        properties.load(stream)
+        properties.load(stream.reader(Charsets.UTF_8))
 
         val stringMap = properties.toMap()
             .mapKeys { it.key.toString() }
@@ -27,7 +27,8 @@ object ArkiLangPropertiesLoader: ArkiLangLoader {
 
         return ArkiLangFile(
             inherit = null,
-            values = stringMap.toMutableMap()
+            locale = locale,
+            data = stringMap.toMutableMap()
         )
     }
 }
