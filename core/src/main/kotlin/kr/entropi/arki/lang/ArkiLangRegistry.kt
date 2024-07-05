@@ -16,7 +16,7 @@ object ArkiLangRegistry {
 
     fun addFilePreprocessing(file: ArkiLangFile, adjustPriority: Boolean = true) {
         val preprocessed = preprocessor.preprocess(file)
-        addFile(file, adjustPriority)
+        addFile(preprocessed, adjustPriority)
     }
 
     fun addFile(file: ArkiLangFile, adjustPriority: Boolean = true) {
