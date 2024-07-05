@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.9.23"
+    kotlin("jvm")
 }
 
 group = "kr.entropi.arki.lang"
@@ -11,10 +11,8 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-}
 
-tasks.test {
-    useJUnitPlatform()
+    compileOnly("org.slf4j:slf4j-api:2.0.13")
 }
 
 kotlin {

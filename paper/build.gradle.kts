@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.9.23"
+    kotlin("jvm")
 
     id("io.papermc.paperweight.userdev") version "1.7.1"
 }
@@ -18,14 +18,12 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
 
+    compileOnly("org.slf4j:slf4j-api:2.0.13")
+
     implementation(project(":core"))
 
     // Paper
     paperweight.paperDevBundle("1.20.4-R0.1-SNAPSHOT")
-}
-
-tasks.test {
-    useJUnitPlatform()
 }
 
 kotlin {

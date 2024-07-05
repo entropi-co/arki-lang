@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.9.23"
+    kotlin("jvm") version "2.0.0" apply false
     `maven-publish`
 }
 
@@ -8,15 +8,12 @@ version = "1.0-SNAPSHOT"
 
 allprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "java")
     apply(plugin = "maven-publish")
 
     repositories {
         mavenLocal()
         mavenCentral()
-    }
-
-    dependencies {
-        compileOnly("org.slf4j:slf4j-api:2.0.13")
     }
 
     configure<PublishingExtension> {
