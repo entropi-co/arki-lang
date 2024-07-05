@@ -6,7 +6,7 @@ data class ArkiLangFile(
     val inherit: ArkiLangFile? = null,
     val priority: Int = 0,
     val locale: Locale = Locale.getDefault(),
-    val data: MutableMap<String, String> = mutableMapOf()
+    val data: Map<String, String> = mapOf()
 ) {
     fun resolve(key: String): String? {
         return data[key] ?: inherit?.resolve(key)
