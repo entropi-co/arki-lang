@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm")
+    kotlin("jvm") version "1.9.23"
 
     id("io.papermc.paperweight.userdev") version "1.7.1"
 }

@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm")
+    kotlin("jvm") version "1.9.23"
 }
 
 group = "kr.entropi.arki.lang"
