@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.9.23"
+    kotlin("jvm")
 
     id("io.papermc.paperweight.userdev") version "1.7.1"
 }
@@ -24,6 +24,10 @@ dependencies {
 
     // Paper
     paperweight.paperDevBundle("1.20.4-R0.1-SNAPSHOT")
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 kotlin {
